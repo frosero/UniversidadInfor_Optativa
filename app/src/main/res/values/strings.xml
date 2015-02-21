@@ -3,4 +3,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="Numero1">Número 1</string>
+    <string name="Numero2">Número 2</string>
+    <string name="Result">Resultado</string>
+    <string name="btn_Conexion_SWeb">Conexión SW</string>
 </resources>
