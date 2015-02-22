@@ -6,8 +6,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 
 public class UniversidadInfo extends ActionBarActivity {
@@ -18,13 +26,8 @@ public class UniversidadInfo extends ActionBarActivity {
         setContentView(R.layout.activity_universidad_info);
     }
 
-    @Override
+
     protected void EnviarOnclick(View v){
-
-
-
-
-
 
         Thread nt = new Thread(){
             String res;
@@ -42,10 +45,36 @@ public class UniversidadInfo extends ActionBarActivity {
                 request.addProperty("Numero1", Integer.parseInt(Numero1.getText().toString()));
                 request.addProperty("Numero2", Integer.parseInt(Numero2.getText().toString()));
 
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                envelope.dotNet = true;
+
+                envelope.setOutputSoapObject(request);
+
+                HttpTransportSE transporte = new HttpTransportSE(URL);
+
+                try {
+
+                    transporte.call(SOAP_ACTION, envelope);
+                    SoapPrimitive resultado_xml = (SoapPrimitive) envelope.getResponse();
+                    res = resultado_xml.toString();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(UniversidadInfo.this,res, Toast.LENGTH_LONG).show();
+                    }
+                });
 
             }
 
-        }
+        };
+        nt.start();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
