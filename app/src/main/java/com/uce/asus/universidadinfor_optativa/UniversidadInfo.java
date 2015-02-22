@@ -26,22 +26,22 @@ public class UniversidadInfo extends ActionBarActivity {
         setContentView(R.layout.activity_universidad_info);
     }
 
+    //Método para conectar a un servicio web sin el protocolo WDSL
+    protected void EnviarOnclick(View v) {
 
-    protected void EnviarOnclick(View v){
-
-        Thread nt = new Thread(){
+        Thread nt = new Thread() {
             String res;
             final EditText Numero1 = (EditText) findViewById(R.id.et_num1);
             final EditText Numero2 = (EditText) findViewById(R.id.et_num2);
 
             @Override
-            public void run(){
-                String NAMESPACE ="http://localhost/";
-                String URL="http://localhost:9000/Demo_WS_Android.asmx";
-                String METHOD_NAME="Suma";
-                String SOAP_ACTION="http://localhost/Suma";
+            public void run() {
+                String NAMESPACE = "http://localhost/";
+                String URL = "http://localhost:9000/Demo_WS_Android.asmx";
+                String METHOD_NAME = "Suma";
+                String SOAP_ACTION = "http://localhost/Suma";
 
-                SoapObject request = new SoapObject(NAMESPACE,METHOD_NAME);
+                SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
                 request.addProperty("Numero1", Integer.parseInt(Numero1.getText().toString()));
                 request.addProperty("Numero2", Integer.parseInt(Numero2.getText().toString()));
 
@@ -67,7 +67,7 @@ public class UniversidadInfo extends ActionBarActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(UniversidadInfo.this,res, Toast.LENGTH_LONG).show();
+                        Toast.makeText(UniversidadInfo.this, res, Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -76,6 +76,7 @@ public class UniversidadInfo extends ActionBarActivity {
         };
         nt.start();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
