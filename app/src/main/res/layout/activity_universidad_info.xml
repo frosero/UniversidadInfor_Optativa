@@ -51,6 +51,7 @@
         android:id="@+id/button"
         android:layout_below="@+id/et_num2"
         android:layout_alignEnd="@+id/et_num2"
+        android:onClick="EnviarOnclick"
         android:layout_marginTop="38dp" />
 
     <TextView
