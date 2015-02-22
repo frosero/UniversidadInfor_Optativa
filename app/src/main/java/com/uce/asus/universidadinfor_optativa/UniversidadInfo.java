@@ -26,7 +26,7 @@ public class UniversidadInfo extends ActionBarActivity {
         setContentView(R.layout.activity_universidad_info);
     }
 
-
+//Método para conectar a un servicio web sin el protocolo WDSL
     protected void EnviarOnclick(View v){
 
         Thread nt = new Thread(){
